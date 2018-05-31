@@ -3,6 +3,7 @@ import './App.css';
 import { COMPONENT } from './dev.json'
 
 import Calendar from './Calendar'
+import Stepper from './ClientSide/Component/Stepper/stepper.jsx'
 // import JeffsNewComponent from './JeffsNewComponent'
 
 class App extends Component {
@@ -11,8 +12,8 @@ class App extends Component {
     let ComponentToDevelop = null
     if (COMPONENT === 'Calendar') {
       ComponentToDevelop = Calendar
-    } else if (COMPONENT === 'JeffsNewComponent') {
-      // ComponentToDevelop = JeffsNewComponent
+    } else if (COMPONENT === 'Stepper') {
+      ComponentToDevelop = Stepper
     }
     return (
       <div className="App">

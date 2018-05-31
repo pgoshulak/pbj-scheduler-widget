@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,17 +21,20 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Select Service', 'Book Appointment', 'Your Information', 'Confirmation'];
 }
 
+//this is where your components will go
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Select campaign settings...';
+      return 'Select a service';
     case 1:
-      return 'What is an ad group anyways?';
+      return 'When would you like your appointment?';
     case 2:
-      return 'This is the bit I really care about!';
+      return 'Contact Information';
+    case 3:
+      return 'This is right?';
     default:
       return 'Unknown step';
   }
@@ -49,7 +51,7 @@ class HorizontalLinearStepper extends React.Component {
   };
 
   isStepOptional = step => {
-    return step === 1;
+    return step === null;
   };
 
   isStepSkipped(step) {
