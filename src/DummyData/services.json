@@ -1,0 +1,23 @@
+{
+    "name": "Ben's Hair salon",
+    "services": [
+      {
+        "billingCode": "1",
+        "description": "Men's hair cut",
+        "priceCents": 2500,
+        "durationMin": 15
+      },
+      {
+        "billingCode": "2",
+        "description": "Women's hair cut",
+        "priceCents": 5000,
+        "durationMin": 30
+      },
+      {
+        "billingCode": "3",
+        "description": "Hair coloration",
+        "priceCents": 3000,
+        "durationMin": 15
+      }
+    ]
+  }

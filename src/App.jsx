@@ -4,6 +4,8 @@ import { COMPONENT } from './dev.json'
 
 import Calendar from './Calendar'
 import Stepper from './ClientSide/Component/Stepper/stepper.jsx'
+
+import ServiceData from './DummyData/services.json'
 // import Info from './ClientSide/Component/UserInfo/userInfo.jsx'
 // import JeffsNewComponent from './JeffsNewComponent'
 
@@ -18,7 +20,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <ComponentToDevelop />
+        <ComponentToDevelop services={ServiceData}/>
       </div>
     );
   }

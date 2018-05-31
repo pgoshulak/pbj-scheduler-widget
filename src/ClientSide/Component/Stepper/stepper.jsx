@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 //imported components
 import UserInfo from '../UserInfo/userInfo.jsx';
+import ServiceList from '../ServiceList/serviceList.jsx';
 
 const styles = theme => ({
   root: {
@@ -28,10 +29,15 @@ function getSteps() {
 }
 
 //this is where your components will go
-function getStepContent(step) {
+function getStepContent(step, services) {
   switch (step) {
     case 0:
-      return 'Select a service';
+      return (
+        <div>
+          <ServiceList services={services.services} />
+          Select a service
+        </div>
+      )
     case 1:
       return 'When would you like your appointment?';
     case 2:
@@ -136,6 +142,7 @@ class HorizontalLinearStepper extends React.Component {
             <div>
               <Typography className={classes.instructions}>
                 All steps completed - you&quot;re finished
+                {this.props.services}
               </Typography>
               <Button onClick={this.handleReset} className={classes.button}>
                 Reset
@@ -143,7 +150,7 @@ class HorizontalLinearStepper extends React.Component {
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              <Typography className={classes.instructions}>{getStepContent(activeStep, this.props.services)}</Typography>
               <div>
                 <Button
                   disabled={activeStep === 0}
