@@ -7,6 +7,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+//imported components
+import UserInfo from '../UserInfo/userInfo.jsx';
+
 const styles = theme => ({
   root: {
     width: '90%',
@@ -32,7 +35,12 @@ function getStepContent(step) {
     case 1:
       return 'When would you like your appointment?';
     case 2:
-      return 'Contact Information';
+      return (
+          <div>
+            <UserInfo />
+            Contact Information
+          </div>
+        )
     case 3:
       return 'This is right?';
     default:
