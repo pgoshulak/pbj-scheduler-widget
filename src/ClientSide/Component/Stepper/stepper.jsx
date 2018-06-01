@@ -29,12 +29,12 @@ function getSteps() {
 }
 
 //this is where your components will go
-function getStepContent(step, services) {
+function getStepContent(step, services, handleServices) {
   switch (step) {
     case 0:
       return (
         <div>
-          <ServiceList services={services.services} />
+          <ServiceList services={services.services} handleServices={handleServices}/>
           Select a service
         </div>
       )
@@ -150,7 +150,11 @@ class HorizontalLinearStepper extends React.Component {
             </div>
           ) : (
             <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep, this.props.services)}</Typography>
+              {/* this is where you past the services to the service component */}
+              <Typography
+                className={classes.instructions}>
+                  {getStepContent(activeStep, this.props.services, this.props.handleServices)}
+              </Typography>
               <div>
                 <Button
                   disabled={activeStep === 0}
@@ -159,6 +163,8 @@ class HorizontalLinearStepper extends React.Component {
                 >
                   Back
                 </Button>
+              {/*I don't think you need this, its for optional steps, remove from template*/}
+              {/*
                 {this.isStepOptional(activeStep) && (
                   <Button
                     variant="contained"
@@ -169,6 +175,7 @@ class HorizontalLinearStepper extends React.Component {
                     Skip
                   </Button>
                 )}
+              */}
                 <Button
                   variant="contained"
                   color="primary"

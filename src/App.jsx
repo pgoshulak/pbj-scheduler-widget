@@ -9,7 +9,29 @@ import ServiceData from './DummyData/services.json'
 // import Info from './ClientSide/Component/UserInfo/userInfo.jsx'
 // import JeffsNewComponent from './JeffsNewComponent'
 
+
+//--------------------------------------------------
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      client: {name: null, email: null, phone: null},
+      services: [],
+      confirmation: {}
+    };
+  }
+
+//--------------state functions---------------------
+
+  handleServices = (service) => {
+    this.setState(previousState => ({
+      services: [...previousState.services, service],//updates the services array in state
+    }));
+  }
+
+//--------------------------------------------------
+
   render() {
     // Set the component to develop
     let ComponentToDevelop = null
@@ -20,7 +42,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <ComponentToDevelop services={ServiceData}/>
+        <ComponentToDevelop services={ServiceData} handleServices={this.handleServices}/>
       </div>
     );
   }
