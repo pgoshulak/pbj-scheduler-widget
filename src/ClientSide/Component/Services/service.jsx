@@ -1,20 +1,38 @@
 import React, { Component } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 
-function Service (props){
-  const service = props.service;
-  return (
-    <div>
-      <Checkbox onChange = { () => {
-        console.log("inside checkbox",service)
-        props.handleServices(service)
-        }
-      }/>
-      <span>{props.service.description}</span>
-      <span>{props.service.priceCents}</span>
-      <span>{props.service.durationMin}</span>
-    </div>
-  )
+class Service extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isChecked: false
+    };
+  }
+
+  handleCheck = () => {
+    if (this.state.isChecked === false){
+      this.checkState(true);
+      this.props.handleServices(this.props.service, true)
+    }else if(this.state.isChecked === true){
+      this.checkState(false);
+      this.props.handleServices(this.props.service, false)
+    }
+  }
+
+  checkState = ( flag ) => {
+    this.setState({isChecked: flag});
+  }
+
+  render(){
+    return (
+      <div>
+        <Checkbox onChange = { this.handleCheck } />
+        <span>{this.props.service.description}</span>
+        <span>{this.props.service.priceCents}</span>
+        <span>{this.props.service.durationMin}</span>
+      </div>
+    )
+  }
 }
 
 export default Service;

@@ -22,13 +22,31 @@ class App extends Component {
     };
   }
 
-//--------------state functions---------------------
+//--------------handle functions---------------------
 
-  handleServices = (service) => {
-    this.setState(previousState => ({
-      services: [...previousState.services, service],//updates the services array in state
-    }));
+  handleServices = (service, flag) => {
+    console.log("flag in handleServices",flag);
+    if(flag === true){
+      this.addServices(service);
+    }else if (flag === false){
+      this.removeService(service);
+    }
   }
+
+//-------------state functions----------------------
+
+addServices = (service) => {
+  this.setState(previousState => ({
+    services: [...previousState.services, service],//updates the services array in state
+  }));
+}
+
+removeService = (service) => {
+  const newService = this.state.services;
+  // newService.map((service) {
+
+  // });
+}
 
 //--------------------------------------------------
 
