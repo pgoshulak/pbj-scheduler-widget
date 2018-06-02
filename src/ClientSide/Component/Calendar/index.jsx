@@ -26,11 +26,19 @@ class Calendar extends Component {
     })
   }
   createAppointment = (startTime) => {
-    this.setState({ newEvent: {
+    // Generate new event
+    const newEvent = {
       start: startTime,
       end: getEndTime(startTime, this.props.appointmentData.durationMin),
       title: this.props.appointmentData.title
-    }})
+    }
+    // Create event on current <Calendar/> display
+    this.setState({ newEvent })
+    // Send event to parent data handler
+    this.props.handleClientInput({
+      packageType: 'calendar',
+      packageData: newEvent
+    })
   }
   handleSlotSelect = (slotInfo) => {
     this.createAppointment(slotInfo.start)
