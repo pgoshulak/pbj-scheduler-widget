@@ -60,7 +60,8 @@ function getStepContent(step, services, handleClientInput) {
     case 2:
       return (
           <div>
-            <UserInfo />
+            <UserInfo
+            handleClientInput={handleClientInput}/>
             Contact Information
           </div>
         )

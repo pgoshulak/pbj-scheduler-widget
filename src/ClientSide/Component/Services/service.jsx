@@ -9,7 +9,7 @@ class Service extends Component {
     };
   }
 
-  buildService(isChecked){
+  buildService = (isChecked) => {
     const servicePackage = {
       packageType: "service",
       service: this.props.service,
