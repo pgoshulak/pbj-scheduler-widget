@@ -58,6 +58,7 @@ handleCalendar = (calendarPackage) => {
 }
 
 handleUserInfo = (userPackage) => {
+  console.log("handleUserInfo",userPackage.userInfo)
   this.setUserState(userPackage.userInfo);
 }
 

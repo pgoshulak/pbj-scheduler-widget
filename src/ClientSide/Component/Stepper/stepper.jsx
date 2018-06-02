@@ -82,21 +82,9 @@ class HorizontalLinearStepper extends React.Component {
     skipped: new Set(),
   };
 
-  isStepOptional = step => {
-    return step === null;
-  };
-
-  isStepSkipped(step) {
-    return this.state.skipped.has(step);
-  }
-
   handleNext = () => {
     const { activeStep } = this.state;
     let { skipped } = this.state;
-    if (this.isStepSkipped(activeStep)) {
-      skipped = new Set(skipped.values());
-      skipped.delete(activeStep);
-    }
     this.setState({
       activeStep: activeStep + 1,
       skipped,
@@ -107,21 +95,6 @@ class HorizontalLinearStepper extends React.Component {
     const { activeStep } = this.state;
     this.setState({
       activeStep: activeStep - 1,
-    });
-  };
-
-  handleSkip = () => {
-    const { activeStep } = this.state;
-    if (!this.isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-    const skipped = new Set(this.state.skipped.values());
-    skipped.add(activeStep);
-    this.setState({
-      activeStep: this.state.activeStep + 1,
-      skipped,
     });
   };
 
@@ -142,12 +115,7 @@ class HorizontalLinearStepper extends React.Component {
           {steps.map((label, index) => {
             const props = {};
             const labelProps = {};
-            if (this.isStepOptional(index)) {
-              labelProps.optional = <Typography variant="caption">Optional</Typography>;
-            }
-            if (this.isStepSkipped(index)) {
-              props.completed = false;
-            }
+
             return (
               <Step key={label} {...props}>
                 <StepLabel {...labelProps}>{label}</StepLabel>
@@ -168,7 +136,8 @@ class HorizontalLinearStepper extends React.Component {
             </div>
           ) : (
             <div>
-              {/* this is where you past the services to the service component */}
+              {/* the getStepContent function is where you place your components */}
+              {/* pass any info from app as a aurgument*/}
               <div
                 className={classes.instructions}>
                   {getStepContent(activeStep,
@@ -184,19 +153,6 @@ class HorizontalLinearStepper extends React.Component {
                 >
                   Back
                 </Button>
-              {/*I don't think you need this, its for optional steps, remove from template*/}
-              {/*
-                {this.isStepOptional(activeStep) && (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.handleSkip}
-                    className={classes.button}
-                  >
-                    Skip
-                  </Button>
-                )}
-              */}
                 <Button
                   variant="flat"
                   color="primary"

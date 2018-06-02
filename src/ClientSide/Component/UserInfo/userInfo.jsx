@@ -15,17 +15,34 @@ class UserInfo extends Component {
     };
   }
 
-  handleBlur = (event) => {
+  buildUser = () => {
+    const userPackage = {
+      packageType: "userInfo",
+      userInfo: {
+        name: this.state.name,
+        phone: this.state.phone,
+        email: this.state.email
+      }
+    }
+    return userPackage;
+  }
+
+  handleOnChange = (event) => {
     const { name, value } = event.target;
-    //console.log("name of input",name)
-    //console.log("value",value);
-    this.setUserInfoState(name, value);
+    const myPromise = new Promise((resolve, reject)=>{
+      this.setUserInfoState(name, value);
+      resolve();
+    })
+    myPromise.then(()=>{
+      this.props.handleClientInput(this.buildUser());
+    })
   }
 
   setUserInfoState = (key, value) => {
-    this.setState({[key]: value});
+    this.setState( () => ({
+      [key]: value
+    }));
   }
-
 
   render(){
     return (
@@ -33,24 +50,27 @@ class UserInfo extends Component {
         <FormControl>
           <InputLabel>Name</InputLabel>
           <Input
+            value = {this.state.name}
             name = "name"
-            onBlur = { this.handleBlur }
+            onChange = { this.handleOnChange }
           />
         </FormControl>
         <br />
         <FormControl>
           <InputLabel>Phone Number</InputLabel>
           <Input
+            value = {this.state.phone}
             name ="phone"
-            onBlur = { this.handleBlur }
+            onChange = { this.handleOnChange }
           />
         </FormControl>
         <br />
         <FormControl>
           <InputLabel>E-mail</InputLabel>
           <Input
+            value = {this.state.email}
             name ="email"
-            onBlur = { this.handleBlur }
+            onChange = { this.handleOnChange }
           />
         </FormControl>
       </div>
