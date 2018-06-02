@@ -13,7 +13,8 @@ export function getEvents() {
         events.push({
           start: event.start.date || new Date(event.start.dateTime),
           end: event.end.date || new Date(event.end.dateTime),
-          title: "Booked"
+          title: "Booked",
+          booked: true
         })
       })
       return events

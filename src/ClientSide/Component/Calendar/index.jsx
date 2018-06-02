@@ -51,6 +51,18 @@ class Calendar extends Component {
     // Return 'false' to prevent default 'select time box' behaviour
     return false
   }
+  // Customize the event cell styling
+  eventPropGetter = (event) => {
+    const style = {
+      backgroundColor: '#4caf50',
+      border: '1px solid #327435'
+    }
+    if (event.booked == true) {
+      style.backgroundColor = 'grey'
+      style.borderColor = 'darkgrey'
+    }
+    return { style }
+  }
   render() { 
     return (
       <div>
@@ -68,6 +80,7 @@ class Calendar extends Component {
           onSelectSlot={this.handleSlotSelect}
           onSelectEvent={this.handleEventSelect}
           onSelecting={this.onSelecting}
+          eventPropGetter={this.eventPropGetter}
           />
       </div>
      )
