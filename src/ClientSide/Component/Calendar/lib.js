@@ -1,5 +1,9 @@
 import axios from 'axios'
 import { API_KEY, CALENDAR_ID } from '../../../calendar_secrets.json'
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
+
+const moment = extendMoment(Moment);
 
 // https://blog.daftcode.pl/react-calendar-with-google-calendar-as-cms-tutorial-5f5d81e425a9
 
@@ -13,7 +17,8 @@ export function getEvents() {
         events.push({
           start: event.start.date || new Date(event.start.dateTime),
           end: event.end.date || new Date(event.end.dateTime),
-          title: "Booked"
+          title: "Booked",
+          booked: true
         })
       })
       return events
@@ -21,4 +26,15 @@ export function getEvents() {
     .catch(err => {
       console.error(err)
     })
+}
+
+// Calculate an end-time given start-time and duration
+export function getEndTime(startTime, durationMin) {
+  return new Date(startTime.getTime() + (durationMin * 60 * 1000))
+}
+
+export function checkEventOverlap(a, b) {
+  const rangeA = moment.range(a.start, a.end)
+  const rangeB = moment.range(b.start, b.end)
+  return rangeA.overlaps(rangeB)
 }

@@ -48,13 +48,14 @@ function getStepContent(step, services, client, handleClientInput) {
           handleClientInput={handleClientInput}
           /* TODO: pass the appointment data here */
           appointmentData={{
-            timeMin: 45,
+            durationMin: 45,
             title: "Haircut and Wash"
           }}
           /* TODO: pass the calendar's data here */
           calendarData={{
             gridSmall: 15,
-            gridLarge: 60
+            gridLarge: 60,
+            maxConcurrentAppointments: 2
           }}
         />)
     case 2:
