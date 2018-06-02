@@ -24,19 +24,25 @@ class App extends Component {
 
 //--------------handle functions---------------------
 
-handleClientInput = (Input) => {
-
-}
-
-handleServices = (service, flag) => {
-  if (flag === true){
-    this.addNewService(service);
-  } else if (flag === false){
-    this.removeService(service);
+handleClientInput = (clientPackage) => {
+  switch (clientPackage.packageType){
+    case 'service':
+      this.handleServices(clientPackage);
+      break;
+    default:
+      console.log("you did something wrong jeff");
   }
 }
 
-//-------------state functions----------------------
+handleServices = (servicePackage) => {
+  if (servicePackage.flag === true){
+    this.addNewService(servicePackage.service);
+  } else if (servicePackage.flag === false){
+    this.removeService(servicePackage.service);
+  }
+}
+
+//-------------Service Functions----------------------
 
 addNewService = (service) => {
   this.setState(previousState => ({
@@ -44,14 +50,14 @@ addNewService = (service) => {
   }));
 }
 
-replaceServices = (newServices) => {
-  this.setState({services: newServices})
-}
-
 removeService = (match) => {
   let newService = [];
   newService = this.state.services.filter(service => service.billingCode !== match.billingCode)
   this.replaceServices(newService);
+}
+
+replaceServices = (newServices) => {
+  this.setState({services: newServices})
 }
 
 //--------------------------------------------------
@@ -66,7 +72,11 @@ removeService = (match) => {
     }
     return (
       <div className="App">
-        <ComponentToDevelop services={ServiceData} handleServices={this.handleServices}/>
+        <ComponentToDevelop
+          services={ServiceData}
+          handleServices={this.handleServices}
+          handleClientInput={this.handleClientInput}
+        />
       </div>
     );
   }

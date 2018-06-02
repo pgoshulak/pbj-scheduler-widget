@@ -9,13 +9,24 @@ class Service extends Component {
     };
   }
 
-  handleCheck = () => {
+  buildService(isChecked){
+    const servicePackage = {
+      packageType: "service",
+      service: this.props.service,
+      flag: isChecked
+    }
+    return servicePackage;
+  }
+
+  handleCheckBox = () => {
     if (this.state.isChecked === false){
       this.checkState(true);
-      this.props.handleServices(this.props.service, true)
+      this.props.handleClientInput(this.buildService(true));
+      //this.props.handleServices(this.props.service, true)
     }else if(this.state.isChecked === true){
       this.checkState(false);
-      this.props.handleServices(this.props.service, false)
+      this.props.handleClientInput(this.buildService(false));
+      //this.props.handleServices(this.props.service, false)
     }
   }
 
@@ -26,7 +37,7 @@ class Service extends Component {
   render(){
     return (
       <div>
-        <Checkbox onChange = { this.handleCheck } />
+        <Checkbox onChange = { this.handleCheckBox } />
         <span>{this.props.service.description}</span>
         <span>{this.props.service.priceCents}</span>
         <span>{this.props.service.durationMin}</span>

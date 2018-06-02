@@ -29,12 +29,16 @@ function getSteps() {
 }
 
 //this is where your components will go
-function getStepContent(step, services, handleServices) {
+function getStepContent(step, services, handleServices, handleClientInput) {
   switch (step) {
     case 0:
       return (
         <div>
-          <ServiceList services={services.services} handleServices={handleServices}/>
+          <ServiceList
+            services={services.services}
+            handleServices={handleServices}
+            handleClientInput={handleClientInput}
+          />
           Select a service
         </div>
       )
@@ -153,7 +157,11 @@ class HorizontalLinearStepper extends React.Component {
               {/* this is where you past the services to the service component */}
               <Typography
                 className={classes.instructions}>
-                  {getStepContent(activeStep, this.props.services, this.props.handleServices)}
+                  {getStepContent(activeStep,
+                    this.props.services,
+                    this.props.handleServices,
+                    this.props.handleClientInput
+                  )}
               </Typography>
               <div>
                 <Button
