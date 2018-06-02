@@ -46,6 +46,16 @@ function getStepContent(step, services, handleClientInput) {
       return (
         <Calendar
           handleClientInput={handleClientInput}
+          /* TODO: pass the appointment data here */
+          appointmentData={{
+            timeMin: 45,
+            title: "Haircut and Wash"
+          }}
+          /* TODO: pass the calendar's data here */
+          calendarData={{
+            gridSmall: 15,
+            gridLarge: 60
+          }}
         />)
     case 2:
       return (
