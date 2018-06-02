@@ -22,3 +22,8 @@ export function getEvents() {
       console.error(err)
     })
 }
+
+// Calculate an end-time given start-time and duration
+export function getEndTime(startTime, durationMin) {
+  return new Date(startTime.getTime() + (durationMin * 60 * 1000))
+}

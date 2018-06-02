@@ -48,7 +48,7 @@ function getStepContent(step, services, handleClientInput) {
           handleClientInput={handleClientInput}
           /* TODO: pass the appointment data here */
           appointmentData={{
-            timeMin: 45,
+            durationMin: 45,
             title: "Haircut and Wash"
           }}
           /* TODO: pass the calendar's data here */
