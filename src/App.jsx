@@ -29,6 +29,9 @@ handleClientInput = (clientPackage) => {
     case 'service':
       this.handleServices(clientPackage);
       break;
+    case 'calendar':
+      this.handleCalendar(clientPackage);
+      break;
     default:
       console.log("you did something wrong jeff");
   }
@@ -40,6 +43,11 @@ handleServices = (servicePackage) => {
   } else if (servicePackage.flag === false){
     this.removeService(servicePackage.service);
   }
+}
+
+// Handle event data sent from Calendar component
+handleCalendar = (calendarPackage) => {
+  console.log(calendarPackage)
 }
 
 //-------------Service Functions----------------------

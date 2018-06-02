@@ -18,12 +18,24 @@ class Calendar extends Component {
       this.setState({events})
     })
   }
+  handleClick = () => {
+    this.props.handleClientInput({
+      packageType: 'calendar',
+      data: 'blah'
+    })
+  }
   render() { 
     return (
       <div>
+        <button onClick={this.handleClick}>Go</button>
         <BigCalendar 
           style={{height: '420px'}}
-          events={this.state.events} />
+          events={this.state.events}
+          defaultDate={new Date()}
+          defaultView='week'
+          drilldownView="agenda"
+
+          scrollToTime={new Date()} />
       </div>
      )
   }

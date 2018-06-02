@@ -43,7 +43,10 @@ function getStepContent(step, services, handleClientInput) {
         </div>
       )
     case 1:
-      return <Calendar/>
+      return (
+        <Calendar
+          handleClientInput={handleClientInput}
+        />)
     case 2:
       return (
           <div>
