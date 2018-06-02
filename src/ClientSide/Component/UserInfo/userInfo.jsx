@@ -15,6 +15,16 @@ class UserInfo extends Component {
     };
   }
 
+  componentDidMount() {
+    const { clientInfo } =  this.props;
+    //console.log("client info",this.props.clientInfo)
+    this.setState({
+      name: clientInfo.name,
+      phone: clientInfo.phone,
+      email: clientInfo.email
+    })
+  }
+
   buildUser = () => {
     const userPackage = {
       packageType: "userInfo",

@@ -100,6 +100,7 @@ setUserState = (userInfo) => {
       <div className="App">
         <ComponentToDevelop
           services={ServiceData}
+          client={this.state.client}
           handleClientInput={this.handleClientInput}
         />
       </div>
