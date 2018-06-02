@@ -22,11 +22,9 @@ class Service extends Component {
     if (this.state.isChecked === false){
       this.checkState(true);
       this.props.handleClientInput(this.buildService(true));
-      //this.props.handleServices(this.props.service, true)
     }else if(this.state.isChecked === true){
       this.checkState(false);
       this.props.handleClientInput(this.buildService(false));
-      //this.props.handleServices(this.props.service, false)
     }
   }
 

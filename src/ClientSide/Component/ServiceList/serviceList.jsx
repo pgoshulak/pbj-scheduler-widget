@@ -6,7 +6,6 @@ function serviceList (props) {
     return <Service
       key={i}
       service={service}
-      handleServices={props.handleServices}
       handleClientInput={props.handleClientInput}
     />
   });

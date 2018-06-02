@@ -159,7 +159,6 @@ class HorizontalLinearStepper extends React.Component {
                 className={classes.instructions}>
                   {getStepContent(activeStep,
                     this.props.services,
-                    this.props.handleServices,
                     this.props.handleClientInput
                   )}
               </Typography>

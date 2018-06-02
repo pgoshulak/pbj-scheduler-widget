@@ -23,7 +23,7 @@ class App extends Component {
   }
 
 //--------------handle functions---------------------
-
+//function that determines what happens to client input based on package type
 handleClientInput = (clientPackage) => {
   switch (clientPackage.packageType){
     case 'service':
@@ -33,7 +33,7 @@ handleClientInput = (clientPackage) => {
       console.log("you did something wrong jeff");
   }
 }
-
+//handles services, either adds to removes them from state
 handleServices = (servicePackage) => {
   if (servicePackage.flag === true){
     this.addNewService(servicePackage.service);
@@ -74,7 +74,6 @@ replaceServices = (newServices) => {
       <div className="App">
         <ComponentToDevelop
           services={ServiceData}
-          handleServices={this.handleServices}
           handleClientInput={this.handleClientInput}
         />
       </div>
