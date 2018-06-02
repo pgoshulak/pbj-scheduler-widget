@@ -24,28 +24,34 @@ class App extends Component {
 
 //--------------handle functions---------------------
 
-  handleServices = (service, flag) => {
-    console.log("flag in handleServices",flag);
-    if(flag === true){
-      this.addServices(service);
-    }else if (flag === false){
-      this.removeService(service);
-    }
+handleClientInput = (Input) => {
+
+}
+
+handleServices = (service, flag) => {
+  if (flag === true){
+    this.addNewService(service);
+  } else if (flag === false){
+    this.removeService(service);
   }
+}
 
 //-------------state functions----------------------
 
-addServices = (service) => {
+addNewService = (service) => {
   this.setState(previousState => ({
     services: [...previousState.services, service],//updates the services array in state
   }));
 }
 
-removeService = (service) => {
-  const newService = this.state.services;
-  // newService.map((service) {
+replaceServices = (newServices) => {
+  this.setState({services: newServices})
+}
 
-  // });
+removeService = (match) => {
+  let newService = [];
+  newService = this.state.services.filter(service => service.billingCode !== match.billingCode)
+  this.replaceServices(newService);
 }
 
 //--------------------------------------------------
