@@ -54,7 +54,8 @@ function getStepContent(step, services, handleClientInput) {
           /* TODO: pass the calendar's data here */
           calendarData={{
             gridSmall: 15,
-            gridLarge: 60
+            gridLarge: 60,
+            maxConcurrentAppointments: 2
           }}
         />)
     case 2:
