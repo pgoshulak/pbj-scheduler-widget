@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { COMPONENT } from './dev.json'
 
-import Calendar from './Calendar'
+import Calendar from './ClientSide/Component/Calendar'
 import Stepper from './ClientSide/Component/Stepper/stepper.jsx'
 
 import ServiceData from './DummyData/services.json'

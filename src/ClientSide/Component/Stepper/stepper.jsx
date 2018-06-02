@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 //imported components
 import UserInfo from '../UserInfo/userInfo.jsx';
 import ServiceList from '../ServiceList/serviceList.jsx';
+import Calendar from '../Calendar'
 
 const styles = theme => ({
   root: {
@@ -29,21 +30,20 @@ function getSteps() {
 }
 
 //this is where your components will go
-function getStepContent(step, services, handleServices, handleClientInput) {
+function getStepContent(step, services, handleClientInput) {
   switch (step) {
     case 0:
       return (
         <div>
           <ServiceList
             services={services.services}
-            handleServices={handleServices}
             handleClientInput={handleClientInput}
           />
           Select a service
         </div>
       )
     case 1:
-      return 'When would you like your appointment?';
+      return <Calendar/>
     case 2:
       return (
           <div>

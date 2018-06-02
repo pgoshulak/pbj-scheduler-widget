@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_KEY, CALENDAR_ID } from '../calendar_secrets.json'
+import { API_KEY, CALENDAR_ID } from '../../../calendar_secrets.json'
 
 // https://blog.daftcode.pl/react-calendar-with-google-calendar-as-cms-tutorial-5f5d81e425a9
 
@@ -9,7 +9,6 @@ export function getEvents() {
   return axios.get(url)
     .then(res => {
       let events = []
-      console.log(res)
       res.data.items.map(event => {
         events.push({
           start: event.start.date || event.start.dateTime,
