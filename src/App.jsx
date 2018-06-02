@@ -16,7 +16,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      client: {name: null, email: null, phone: null},
+      client: {
+          name: null,
+          email: null,
+          phone: null
+      },
       services: [],
       confirmation: {}
     };
@@ -28,6 +32,9 @@ handleClientInput = (clientPackage) => {
   switch (clientPackage.packageType){
     case 'service':
       this.handleServices(clientPackage);
+      break;
+    case 'userInfo':
+      this.handleUserInfo(clientPackage);
       break;
     default:
       console.log("you did something wrong jeff");
@@ -42,6 +49,10 @@ handleServices = (servicePackage) => {
   }
 }
 
+handleUserInfo = (userPackage) => {
+  this.setUserState(userPackage.userInfo);
+}
+
 //-------------Service Functions----------------------
 
 addNewService = (service) => {
@@ -53,11 +64,17 @@ addNewService = (service) => {
 removeService = (match) => {
   let newService = [];
   newService = this.state.services.filter(service => service.billingCode !== match.billingCode)
-  this.replaceServices(newService);
+  this.setServicesState(newService);
 }
 
-replaceServices = (newServices) => {
+setServicesState = (newServices) => {
   this.setState({services: newServices})
+}
+
+//--------------User Info Functions-----------------
+
+setUserState = (userInfo) => {
+  this.setState({client: userInfo});
 }
 
 //--------------------------------------------------
