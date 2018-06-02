@@ -155,13 +155,13 @@ class HorizontalLinearStepper extends React.Component {
           ) : (
             <div>
               {/* this is where you past the services to the service component */}
-              <Typography
+              <div
                 className={classes.instructions}>
                   {getStepContent(activeStep,
                     this.props.services,
                     this.props.handleClientInput
                   )}
-              </Typography>
+              </div>
               <div>
                 <Button
                   disabled={activeStep === 0}
@@ -184,7 +184,7 @@ class HorizontalLinearStepper extends React.Component {
                 )}
               */}
                 <Button
-                  variant="contained"
+                  variant="flat"
                   color="primary"
                   onClick={this.handleNext}
                   className={classes.button}
