@@ -16,17 +16,18 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      business: {
+        name: '',
+        services: []
+      },
       client: {
           name: null,
           email: null,
           phone: null
       },
       services: [],
-      confirmation: {},
-      business: {
-        name: '',
-        services: []
-      }
+      calendar: {},
+      confirmation: {}
     };
   }
 
@@ -77,7 +78,7 @@ handleServices = (servicePackage) => {
 
 // Handle event data sent from Calendar component
 handleCalendar = (calendarPackage) => {
-  console.log(calendarPackage)
+  this.setCalendarState(calendarPackage.packageData);
 }
 
 handleUserInfo = (userPackage) => {
@@ -116,6 +117,12 @@ removeService = (match) => {
 
 setServicesState = (newServices) => {
   this.setState({services: newServices})
+}
+
+//-------------Calendar Functions--------------------
+
+setCalendarState = (calendar) => {
+  this.setState({calendar: calendar});
 }
 
 //--------------User Info Functions-----------------
