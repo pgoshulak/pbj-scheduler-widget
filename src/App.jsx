@@ -5,7 +5,7 @@ import { COMPONENT } from './dev.json'
 import Calendar from './ClientSide/Component/Calendar'
 import Stepper from './ClientSide/Component/Stepper/stepper.jsx'
 
-import ServiceData from './DummyData/services.json'
+import axios from 'axios' //pulls data from db
 // import Info from './ClientSide/Component/UserInfo/userInfo.jsx'
 // import JeffsNewComponent from './JeffsNewComponent'
 
@@ -22,8 +22,31 @@ class App extends Component {
           phone: null
       },
       services: [],
-      confirmation: {}
+      confirmation: {},
+      business: {
+        name: '',
+        services: []
+      }
     };
+  }
+
+//--------------life cycle functions-----------------
+
+componentDidMount(){
+  this.fetchBusinessData("123456123456123456123456");
+}
+
+//---------------fetch functions-----------------------
+
+fetchBusinessData = (businessId) => {
+    axios.get(`http://localhost:5000/api/business/${businessId}`)
+      .then(res => {
+        const business = res.data[0]
+        if (!business) throw new Error(`Error fetching data from business ID ${businessId}`)
+        this.setState({business: business})
+      }).catch(err => {
+        console.error(err)
+      })
   }
 
 //--------------handle functions---------------------
@@ -58,21 +81,36 @@ handleCalendar = (calendarPackage) => {
 }
 
 handleUserInfo = (userPackage) => {
-  console.log("handleUserInfo",userPackage.userInfo)
   this.setUserState(userPackage.userInfo);
+}
+
+//-------------Business Functions---------------------
+//maybe you don't need this
+setBusinessState = (business) => {
+  // this.setState({business: business});
+  // console.log(this.state.business.services);
+
+  const myPromise = new Promise( (resolve, reject) => {
+      this.setState({business: business});
+      resolve();
+    });
+    myPromise.then( () => {
+      console.log("services",this.state.business.services);
+    });
+
 }
 
 //-------------Service Functions----------------------
 
 addNewService = (service) => {
   this.setState(previousState => ({
-    services: [...previousState.services, service],//updates the services array in state
+    services: [...previousState.services, service]//updates the services array in state
   }));
 }
 
 removeService = (match) => {
   let newService = [];
-  newService = this.state.services.filter(service => service.billingCode !== match.billingCode)
+  newService = this.state.services.filter( service => service.billingCode !== match.billingCode);
   this.setServicesState(newService);
 }
 
@@ -99,7 +137,8 @@ setUserState = (userInfo) => {
     return (
       <div className="App">
         <ComponentToDevelop
-          services={ServiceData}
+          //services={ServiceData}
+          services={this.state.business.services}
           client={this.state.client}
           handleClientInput={this.handleClientInput}
         />
