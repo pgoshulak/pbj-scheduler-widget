@@ -83,7 +83,7 @@ class Calendar extends Component {
           defaultDate={new Date()}
           defaultView='week'
           drilldownView="agenda"
-          scrollToTime={new Date()} 
+          scrollToTime={new Date('Jan 1 1970, 9:00:00')} 
           selectable={"ignoreEvents"}
           onSelectSlot={this.handleSlotSelect}
           onSelectEvent={this.handleEventSelect}
