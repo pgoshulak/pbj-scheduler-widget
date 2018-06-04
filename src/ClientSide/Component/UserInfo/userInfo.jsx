@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -39,13 +37,13 @@ class UserInfo extends Component {
 
   handleOnChange = (event) => {
     const { name, value } = event.target;
-    const myPromise = new Promise((resolve, reject)=>{
+    const myPromise = new Promise( (resolve, reject) => {
       this.setUserInfoState(name, value);
       resolve();
-    })
-    myPromise.then(()=>{
+    });
+    myPromise.then( () => {
       this.props.handleClientInput(this.buildUser());
-    })
+    });
   }
 
   setUserInfoState = (key, value) => {
@@ -60,7 +58,7 @@ class UserInfo extends Component {
         <FormControl>
           <InputLabel>Name</InputLabel>
           <Input
-            value = {this.state.name}
+            value = {this.state.name || ""}
             name = "name"
             onChange = { this.handleOnChange }
           />
@@ -69,7 +67,7 @@ class UserInfo extends Component {
         <FormControl>
           <InputLabel>Phone Number</InputLabel>
           <Input
-            value = {this.state.phone}
+            value = {this.state.phone || ""}
             name ="phone"
             onChange = { this.handleOnChange }
           />
@@ -78,7 +76,7 @@ class UserInfo extends Component {
         <FormControl>
           <InputLabel>E-mail</InputLabel>
           <Input
-            value = {this.state.email}
+            value = {this.state.email || ""}
             name ="email"
             onChange = { this.handleOnChange }
           />
