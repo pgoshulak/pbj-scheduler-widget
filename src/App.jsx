@@ -145,7 +145,9 @@ setUserState = (userInfo) => {
       <div className="App">
         <ComponentToDevelop
           //services={ServiceData}
+          // TODO: Deprecate 'services' prop in favour of parent 'business' prop
           services={this.state.business.services}
+          business={this.state.business}
           client={this.state.client}
           handleClientInput={this.handleClientInput}
           selectedServices={this.state.services}
