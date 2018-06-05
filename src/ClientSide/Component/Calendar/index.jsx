@@ -13,7 +13,17 @@ class Calendar extends Component {
       existingEvents: [],
       newEvent: {},
       appointmentTime: totalAppointmentTime(this.props.selectedServices),
-      appointmentName: generateAppointmentName(this.props.selectedServices)
+      appointmentName: generateAppointmentName(this.props.selectedServices),
+
+      // Note: react-big-calendar has confusing nomenclature for the following variables:
+      //   "step" = smallest resolution timeslot, in minutes (aka "minor grid lines")
+      //   "timeslots" = number of "steps" per major division (aka "major grid lines")
+      // Eg: step=15, timeslots=4 ==> minor gridlines at 15 min, major gridlines at 60 min
+      // It's clearer to store these "major/minor gridlines" and calculate step/timeslots here instead
+      calendarGrid: {
+        step: this.props.business.calendarData.gridSmall,
+        timeslots: this.props.business.calendarData.gridLarge / this.props.business.calendarData.gridSmall
+      }
      }
   }
   componentDidMount() {
@@ -31,7 +41,7 @@ class Calendar extends Component {
       valid: true
     }
     // Check if the event has too many overlaps
-      if (this.overlappingEvents(newEvent) + 1 > this.props.calendarData.maxConcurrentAppointments) {
+      if (this.overlappingEvents(newEvent) + 1 > this.props.business.calendarData.maxConcurrentAppointments) {
       newEvent.valid = false
     }
     // Create event on current <Calendar/> display
@@ -80,8 +90,8 @@ class Calendar extends Component {
       <div>
         <BigCalendar 
           style={{height: '420px'}}
-          step={this.props.calendarData.gridSmall}
-          timeslots={this.props.calendarData.gridLarge / this.props.calendarData.gridSmall}
+          step={this.state.calendarGrid.step}
+          timeslots={this.state.calendarGrid.timeslots}
           events={[...this.state.existingEvents, this.state.newEvent]}
           defaultDate={new Date()}
           defaultView='week'

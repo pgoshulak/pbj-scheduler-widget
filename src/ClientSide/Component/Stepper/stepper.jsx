@@ -51,12 +51,6 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
           selectedServices={selectedServices}
           selectedAppointment={selectedAppointment}
           business={business}
-          /* TODO: pass the calendar's data here */
-          calendarData={{
-            gridSmall: 15,
-            gridLarge: 60,
-            maxConcurrentAppointments: 2
-          }}
         />)
     case 2:
       return (
