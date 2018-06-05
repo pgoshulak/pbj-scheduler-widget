@@ -7,10 +7,12 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+
 //imported components
 import UserInfo from '../UserInfo/userInfo.jsx';
 import ServiceList from '../ServiceList/serviceList.jsx';
 import Calendar from '../Calendar'
+import Confirmation from '../Confirmation'
 
 const styles = theme => ({
   root: {
@@ -70,7 +72,11 @@ function getStepContent(step, services, client, handleClientInput, selectedServi
           </div>
         )
     case 3:
-      return 'This is right?';
+      return (
+        <div>
+          <Confirmation />
+        </div>
+      )
     default:
       return 'Unknown step';
   }
