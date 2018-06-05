@@ -32,7 +32,9 @@ function getSteps() {
 }
 
 //this is where your components will go
+
 function getStepContent(step, business, client, handleClientInput, selectedServices, selectedAppointment) {
+
   switch (step) {
     case 0:
       return (
@@ -64,7 +66,7 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
     case 3:
       return (
         <div>
-          <Confirmation />
+          <Confirmation selectedServices= {selectedServices} nameOfBusiness={nameOfBusiness}/>
         </div>
       )
     default:
@@ -145,7 +147,8 @@ class HorizontalLinearStepper extends React.Component {
                     this.props.client,
                     this.props.handleClientInput,
                     this.props.selectedServices,
-                    this.props.selectedAppointment
+                    this.props.selectedAppointment,
+                    this.props.nameOfBusiness
                   )}
               </div>
               <div>
