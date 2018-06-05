@@ -77,9 +77,9 @@ class Calendar extends Component {
       border: '1px solid #327435'
     }
     if (event.valid === false) {
-      style.backgroundColor = '#ea1c0d',
+      style.backgroundColor = '#ea1c0d'
       style.border = '1px solid #ba160a'
-    } else if (event.booked == true) {
+    } else if (event.booked === true) {
       style.backgroundColor = 'grey'
       style.border = '1px solid darkgrey'
     }

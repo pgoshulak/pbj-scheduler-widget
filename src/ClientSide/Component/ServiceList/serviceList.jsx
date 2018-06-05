@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Service from '../Services/service.jsx';
 
 function serviceList (props) {

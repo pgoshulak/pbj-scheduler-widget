@@ -13,7 +13,7 @@ export function getEvents() {
   return axios.get(url)
     .then(res => {
       let events = []
-      res.data.items.map(event => {
+      res.data.items.forEach(event => {
         events.push({
           start: event.start.date || new Date(event.start.dateTime),
           end: event.end.date || new Date(event.end.dateTime),
