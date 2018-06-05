@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment'
 import BigCalendar from 'react-big-calendar'
-import { getEvents, getEndTime, checkEventOverlap } from './lib.js'
+import { getEvents, getEndTime, checkEventOverlap, totalAppointmentTime, generateAppointmentName } from './lib.js'
 BigCalendar.momentLocalizer(moment)
 
 require('react-big-calendar/lib/css/react-big-calendar.css')
@@ -12,6 +12,8 @@ class Calendar extends Component {
     this.state = { 
       existingEvents: [],
       newEvent: {},
+      appointmentTime: totalAppointmentTime(this.props.selectedServices),
+      appointmentName: generateAppointmentName(this.props.selectedServices)
      }
   }
   componentDidMount() {
@@ -23,8 +25,8 @@ class Calendar extends Component {
     // Generate new event
     const newEvent = {
       start: startTime,
-      end: getEndTime(startTime, this.props.appointmentData.durationMin),
-      title: this.props.appointmentData.title,
+      end: getEndTime(startTime, this.state.appointmentTime),
+      title: this.state.appointmentName,
       valid: true
     }
     // Check if the event has too many overlaps

@@ -148,6 +148,8 @@ setUserState = (userInfo) => {
           services={this.state.business.services}
           client={this.state.client}
           handleClientInput={this.handleClientInput}
+          selectedServices={this.state.services}
+          selectedAppointment={this.state.calendar}
         />
       </div>
     );

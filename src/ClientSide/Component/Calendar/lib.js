@@ -38,3 +38,11 @@ export function checkEventOverlap(a, b) {
   const rangeB = moment.range(b.start, b.end)
   return rangeA.overlaps(rangeB)
 }
+
+export function totalAppointmentTime(services) {
+  return services.reduce((total, service) => { return total + service.durationMin}, 0)
+}
+
+export function generateAppointmentName(services) {
+  return services.map(services => services.description).join(', ')
+}
