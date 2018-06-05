@@ -32,7 +32,7 @@ function getSteps() {
 }
 
 //this is where your components will go
-function getStepContent(step, services, business, client, handleClientInput, selectedServices, selectedAppointment) {
+function getStepContent(step, business, client, handleClientInput, selectedServices, selectedAppointment) {
   switch (step) {
     case 0:
       return (
@@ -49,6 +49,8 @@ function getStepContent(step, services, business, client, handleClientInput, sel
         <Calendar
           handleClientInput={handleClientInput}
           selectedServices={selectedServices}
+          selectedAppointment={selectedAppointment}
+          business={business}
           /* TODO: pass the calendar's data here */
           calendarData={{
             gridSmall: 15,
@@ -132,7 +134,7 @@ class HorizontalLinearStepper extends React.Component {
             <div>
               <Typography className={classes.instructions}>
                 All steps completed - you&quot;re finished
-                {this.props.services}
+                {this.props.business.services}
               </Typography>
               <Button onClick={this.handleReset} className={classes.button}>
                 Reset
@@ -145,7 +147,6 @@ class HorizontalLinearStepper extends React.Component {
               <div
                 className={classes.instructions}>
                   {getStepContent(activeStep,
-                    this.props.services,
                     this.props.business,
                     this.props.client,
                     this.props.handleClientInput,

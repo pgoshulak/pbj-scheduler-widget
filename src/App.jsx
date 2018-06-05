@@ -26,7 +26,7 @@ class App extends Component {
           phone: null
       },
       services: [],
-      calendar: {},
+      selectedAppointment: {},
       confirmation: {}
     };
   }
@@ -121,8 +121,8 @@ setServicesState = (newServices) => {
 
 //-------------Calendar Functions--------------------
 
-setCalendarState = (calendar) => {
-  this.setState({calendar: calendar});
+setCalendarState = (newAppointment) => {
+  this.setState({selectedAppointment: newAppointment});
 }
 
 //--------------User Info Functions-----------------
@@ -151,7 +151,7 @@ setUserState = (userInfo) => {
           client={this.state.client}
           handleClientInput={this.handleClientInput}
           selectedServices={this.state.services}
-          selectedAppointment={this.state.calendar}
+          selectedAppointment={this.state.selectedAppointment}
         />
       </div>
     );

@@ -17,6 +17,7 @@ class Calendar extends Component {
      }
   }
   componentDidMount() {
+    this.setState({newEvent: this.props.selectedAppointment})
     getEvents().then(events => {
       this.setState({existingEvents: events})
     })
