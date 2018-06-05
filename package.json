@@ -11,6 +11,7 @@
     "react-big-calendar": "^0.19.1",
     "react-dom": "^16.4.0",
     "react-scripts": "1.1.4",
+    "react-stripe-checkout": "^2.6.3",
     "stripe": "^6.1.0"
   },
   "scripts": {
