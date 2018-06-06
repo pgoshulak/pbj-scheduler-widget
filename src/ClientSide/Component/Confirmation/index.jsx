@@ -4,7 +4,8 @@ import Publishable from '../../../stripekeys.json';
 import StripeCheckout from 'react-stripe-checkout';
 import ConfirmationServices from './confirmationServices.jsx'
 import axios from 'axios';
-
+import {StripeProvider} from 'react-stripe-elements';
+import Checkout from './checkout.jsx';
 
 class Checkboxes extends React.Component {
   state = {
@@ -12,9 +13,9 @@ class Checkboxes extends React.Component {
     checkedA: false,
     checkedB: false
   };
-  
-  sendAppointmentToServer = () => {
-    this.setState({message: 'Sending appointment data to server'}) 
+
+  sendAppointmentToServer = (stripeToken) => {
+    this.setState({message: 'Sending appointment data to server'})
     const appointment_url = `http://localhost:5000/api/business/${this.props.business._id}/appointment`
     const appointment = {
       event: {
@@ -29,7 +30,7 @@ class Checkboxes extends React.Component {
         phone: this.props.clientInfo.phone
       },
       stripeData: {
-        // Ben: put what you need to send to server here
+        token: stripeToken
       }
     }
     axios.post(appointment_url, {data: appointment}).then(res => {
@@ -57,6 +58,22 @@ class Checkboxes extends React.Component {
     });
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target)
+    const testData = {
+      stripe: {
+      }
+    }
+    const inputFields = event.target.elements
+    const cardNumber= {...testData.stripe, card_number: inputFields.card_number.value }
+    const expiaryMonth = {...cardNumber, exp_month: inputFields.exp_month.value}
+    const expiaryYear = {...expiaryMonth, exp_year: inputFields.exp_year.value}
+    const stripeToken = {...expiaryYear, cvc: inputFields.cvc.value}
+    console.log(stripeToken)
+
+  }
+
   render() {
     const clientServices = this.props.selectedServices.map(service => {
       return <ConfirmationServices key={service.billingCode} service={service}/>
@@ -81,13 +98,10 @@ class Checkboxes extends React.Component {
           value="checkedB"
         />
         {this.state.checkedB ?
-          <StripeCheckout
-          name={this.props.business.name}
-          image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwhycbURUXcBANlvwjI-YQNnuGQpICYXl2LsQCB025Pwddz9PP"
-          amount={total}
-          token={this.onToken}
-          stripeKey={Publishable.keyPublishable}
-          /> : <span> Pay Online </span>
+          <StripeProvider apiKey={Publishable.keyPublishable}>
+            <Checkout sendAppointment={this.sendAppointmentToServer} />
+          </StripeProvider>
+           : <span> Pay Online </span>
         }
         <button onClick={this.sendAppointmentToServer}>POST to server</button>
       </div>
