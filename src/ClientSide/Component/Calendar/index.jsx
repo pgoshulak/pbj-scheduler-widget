@@ -47,8 +47,14 @@ class Calendar extends Component {
       title: this.state.appointmentName,
       valid: true
     }
+
+    // Check if business is closed while event requested
+    // FIXME: prevents event from being booked within one 'slot' of closing hour
+    if (checkBusinessClosed(newEvent.start) || checkBusinessClosed(newEvent.end)) {
+      newEvent.valid = false
+
     // Check if the event has too many overlaps
-      if (this.overlappingEvents(newEvent) + 1 > this.props.business.calendarData.maxConcurrentAppointments) {
+    } else if (this.overlappingEvents(newEvent) + 1 > this.props.business.calendarData.maxConcurrentAppointments) {
       newEvent.valid = false
     }
     // Create event on current <Calendar/> display
