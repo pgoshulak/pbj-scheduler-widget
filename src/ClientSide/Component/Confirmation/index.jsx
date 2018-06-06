@@ -24,6 +24,10 @@ class Checkboxes extends React.Component {
       },
       // Array of billing codes, so we don't have to send the entire service object's data
       services: this.props.selectedServices.map(service => service.billingCode),
+      // TODO: Calculate price on server, NOT client, via services
+      totalPrice: this.props.selectedServices.reduce((total, service) => {
+        return total + service.priceCents
+      }, 0),
       customer: {
         name: this.props.clientInfo.name,
         email: this.props.clientInfo.email,
@@ -72,7 +76,7 @@ class Checkboxes extends React.Component {
         />
         {this.state.payOnline ?
           <StripeProvider apiKey={Publishable.keyPublishable}>
-            <Checkout sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo} />
+            <Checkout sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo}/>
           </StripeProvider>
            : <span> Pay Online </span>
         }
