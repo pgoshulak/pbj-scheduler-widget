@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import moment from 'moment'
 import BigCalendar from 'react-big-calendar'
-import { getEvents, getEndTime, checkEventOverlap, totalAppointmentTime, generateAppointmentName } from './lib.js'
+import { 
+  getEvents,
+  getEndTime,
+  checkEventOverlap,
+  totalAppointmentTime,
+  generateAppointmentName,
+  checkBusinessClosed
+} from './lib.js'
 BigCalendar.momentLocalizer(moment)
 
 require('react-big-calendar/lib/css/react-big-calendar.css')
@@ -85,6 +92,20 @@ class Calendar extends Component {
     }
     return { style }
   }
+
+  // CUstom slot styling
+  slotPropGetter = (slotDateTime) => {
+    const timeOffStyle = {
+      backgroundColor: '#eee',
+      border: '1px solid #eee'
+    }
+    if (checkBusinessClosed(slotDateTime)) {
+      return { style: timeOffStyle }
+    } else {
+      return null
+    }
+  }
+
   render() { 
     return (
       <div>
@@ -102,6 +123,7 @@ class Calendar extends Component {
           onSelectEvent={this.handleEventSelect}
           onSelecting={this.onSelecting}
           eventPropGetter={this.eventPropGetter}
+          slotPropGetter={this.slotPropGetter}
           />
       </div>
      )

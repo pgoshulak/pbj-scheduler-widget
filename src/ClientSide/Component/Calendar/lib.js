@@ -46,3 +46,24 @@ export function totalAppointmentTime(services) {
 export function generateAppointmentName(services) {
   return services.map(services => services.description).join(', ')
 }
+
+const sampleHours = [
+  {open: 0, close: 0},
+  {open: 9, close: 16},
+  {open: 9, close: 16},
+  {open: 9, close: 18},
+  {open: 9, close: 18},
+  {open: 9, close: 20},
+  {open: 12, close: 16}
+]
+
+export function checkBusinessClosed(slotDateTime, businessHours = sampleHours) {
+  const slotDayOfWeek = slotDateTime.getDay()
+  const slotHour = slotDateTime.getHours()
+
+  if (slotHour >= businessHours[slotDayOfWeek].close || slotHour < businessHours[slotDayOfWeek].open) {
+    return true
+  } else {
+    return false
+  }
+}
