@@ -8,8 +8,8 @@ class Checkoutform extends React.Component {
   handleSubmit = (event) => {
 
     event.preventDefault();
-    console.log(event.target)
-    this.props.stripe.createToken({name: 'Jenny Rosen'}).then(({token}) => {
+    const customerName = this.props.clientInfo.name
+    this.props.stripe.createToken({name: customerName}).then(({token}) => {
       console.log('Received Stripe token:', token);
       this.props.sendAppointment(token);
     });
