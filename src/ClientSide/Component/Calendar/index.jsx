@@ -7,7 +7,8 @@ import {
   checkEventOverlap,
   totalAppointmentTime,
   generateAppointmentName,
-  checkBusinessClosed
+  checkBusinessClosed,
+  formatBusinessHours
 } from './lib.js'
 BigCalendar.momentLocalizer(moment)
 
@@ -30,11 +31,15 @@ class Calendar extends Component {
       calendarGrid: {
         step: this.props.business.calendarData.gridSmall,
         timeslots: this.props.business.calendarData.gridLarge / this.props.business.calendarData.gridSmall
-      }
+      },
+      businessHoursFormatted: [{}, {}, {}]
      }
   }
-  componentDidMount() {
-    this.setState({newEvent: this.props.selectedAppointment})
+  componentWillMount() {
+    this.setState({
+      newEvent: this.props.selectedAppointment,
+      businessHoursFormatted: formatBusinessHours(this.props.business.hours)
+    })
     getEvents().then(events => {
       this.setState({existingEvents: events})
     })
@@ -50,7 +55,8 @@ class Calendar extends Component {
 
     // Check if business is closed while event requested
     // FIXME: prevents event from being booked within one 'slot' of closing hour
-    if (checkBusinessClosed(newEvent.start) || checkBusinessClosed(newEvent.end)) {
+    if (checkBusinessClosed(newEvent.start, this.state.businessHoursFormatted) 
+    || checkBusinessClosed(newEvent.end, this.state.businessHoursFormatted)) {
       newEvent.valid = false
 
     // Check if the event has too many overlaps
@@ -105,7 +111,7 @@ class Calendar extends Component {
       backgroundColor: '#eee',
       border: '1px solid #eee'
     }
-    if (checkBusinessClosed(slotDateTime)) {
+    if (checkBusinessClosed(slotDateTime, this.state.businessHoursFormatted)) {
       return { style: timeOffStyle }
     } else {
       return null

@@ -47,23 +47,25 @@ export function generateAppointmentName(services) {
   return services.map(services => services.description).join(', ')
 }
 
-const sampleHours = [
-  {open: 0, close: 0},
-  {open: 9, close: 16},
-  {open: 9, close: 16},
-  {open: 9, close: 18},
-  {open: 9, close: 18},
-  {open: 9, close: 20},
-  {open: 12, close: 16}
-]
-
-export function checkBusinessClosed(slotDateTime, businessHours = sampleHours) {
+export function checkBusinessClosed(slotDateTime, businessHours) {
   const slotDayOfWeek = slotDateTime.getDay()
   const slotHour = slotDateTime.getHours()
 
-  if (slotHour >= businessHours[slotDayOfWeek].close || slotHour < businessHours[slotDayOfWeek].open) {
+  if (slotHour >= businessHours[slotDayOfWeek].closing || slotHour < businessHours[slotDayOfWeek].opening) {
     return true
   } else {
     return false
   }
+}
+
+// Reformat opening/closing hours str->num for faster comparisons
+// Eg. "09:00" --> 9
+// Note: only supports whole number hours (eg. cannot do 09:30)
+export function formatBusinessHours(hours) {
+  return hours.map(day => {
+    return {
+      opening: Number(day.opening.substr(0,2)),
+      closing: Number(day.closing.substr(0,2))
+    }
+  })
 }
