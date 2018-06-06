@@ -66,7 +66,7 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
     case 3:
       return (
         <div>
-          <Confirmation selectedServices= {selectedServices} nameOfBusiness={nameOfBusiness}/>
+          <Confirmation selectedServices= {selectedServices} nameOfBusiness={business}/>
         </div>
       )
     default:

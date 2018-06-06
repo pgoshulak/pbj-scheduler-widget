@@ -56,7 +56,7 @@ class Checkboxes extends React.Component {
         />
         {this.state.checkedB ?
           <StripeCheckout
-          name={this.props.nameOfBusiness}
+          name={this.props.nameOfBusiness.name}
           image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwhycbURUXcBANlvwjI-YQNnuGQpICYXl2LsQCB025Pwddz9PP"
           amount={total}
           token={this.onToken}
