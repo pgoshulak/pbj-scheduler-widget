@@ -80,7 +80,7 @@ class Checkboxes extends React.Component {
           </StripeProvider>
            : <span> Pay Online </span>
         }
-        <button onClick={this.sendAppointmentToServer}>POST to server</button>
+        <button onClick={() => this.sendAppointmentToServer(null)}>POST to server</button>
       </div>
     )
   }
