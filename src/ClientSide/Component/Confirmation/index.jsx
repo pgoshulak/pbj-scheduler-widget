@@ -68,19 +68,22 @@ class Checkboxes extends React.Component {
           onChange={this.handleChange}
           value="payStore"
         />
-        <span> Pay at store </span>
+        {this.state.payStore ?
+          <button onClick={this.sendAppointmentToServer}> Confirm Appointment</button> :
+          <span> Pay at store </span>}
+
         <Checkbox
           checked={this.state.payOnline}
           onChange={this.handleChange}
           value="payOnline"
         />
+
         {this.state.payOnline ?
           <StripeProvider apiKey={Publishable.keyPublishable}>
             <Checkout sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo}/>
           </StripeProvider>
            : <span> Pay Online </span>
         }
-        <button onClick={() => this.sendAppointmentToServer(null)}>POST to server</button>
       </div>
     )
   }
