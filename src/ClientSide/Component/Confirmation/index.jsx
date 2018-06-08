@@ -53,8 +53,8 @@ class SimpleTabs extends React.Component {
         start: this.props.selectedAppointment.start,
         end: this.props.selectedAppointment.end
       },
-      // Array of billing codes, so we don't have to send the entire service object's data
-      services: this.props.selectedServices.map(service => service.billingCode),
+      // TODO: Send only billing codes, to reduce data transfer
+      services: this.props.selectedServices,
       // TODO: Calculate price on server, NOT client, via services
       totalPrice: this.props.selectedServices.reduce((total, service) => {
         return total + service.priceCents
