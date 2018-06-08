@@ -2,6 +2,19 @@ import React from 'react';
 import {injectStripe} from 'react-stripe-elements';
 
 import CardSection from './cardSection.jsx'
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
+const styles = theme => ({
+  confirm: {
+    backgroundColor: '#6671e6',
+    color: 'white',
+    fontSize: '14px',
+    padding: '11px',
+    borderRadius: '5px',
+    textAlign: 'left'
+  }
+});
 
 class Checkoutform extends React.Component {
 
@@ -16,13 +29,20 @@ class Checkoutform extends React.Component {
   }
 
   render () {
+    const { classes, theme } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
         <CardSection />
-        <button>Confirm order</button>
+        <button className={classes.confirm}>PAY</button>
       </form>
     );
   }
 }
 
-export default injectStripe(Checkoutform);
+Checkoutform.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default injectStripe(withStyles(styles)(Checkoutform));
+
+//export default injectStripe(Checkoutform);
