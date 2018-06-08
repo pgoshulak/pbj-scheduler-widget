@@ -7,6 +7,7 @@ function serviceList (props) {
       key={i}
       service={service}
       handleClientInput={props.handleClientInput}
+      selectedServices={props.selectedServices}
     />
   });
 

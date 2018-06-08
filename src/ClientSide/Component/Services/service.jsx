@@ -9,6 +9,18 @@ class Service extends Component {
     };
   }
 
+  //componentWillMount() is unsafe according to the documentation
+  //look into this later
+  componentWillMount(){
+    if(this.props.selectedServices.length !== 0){
+      for (let service of this.props.selectedServices) {
+        if(service.billingCode === this.props.service.billingCode){
+          this.checkState(true);//on load checks the box if this service is selected previously
+        }
+      }
+    }
+  }
+
   buildService = (isChecked) => {
     const servicePackage = {
       packageType: "service",
@@ -35,7 +47,7 @@ class Service extends Component {
   render(){
     return (
       <div>
-        <Checkbox onChange = { this.handleCheckBox } />
+        <Checkbox onChange = { this.handleCheckBox } defaultChecked={this.state.isChecked}/>
         <span>{this.props.service.description}</span>
         <span>{this.props.service.priceCents}</span>
         <span>{this.props.service.durationMin}</span>
