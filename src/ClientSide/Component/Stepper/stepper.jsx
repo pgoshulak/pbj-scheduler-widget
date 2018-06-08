@@ -42,6 +42,7 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
           <ServiceList
             services={business.services}
             handleClientInput={handleClientInput}
+            selectedServices={selectedServices}
           />
           Select a service
         </div>
