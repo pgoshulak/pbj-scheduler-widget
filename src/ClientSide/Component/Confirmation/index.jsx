@@ -74,11 +74,15 @@ class SimpleTabs extends React.Component {
     }
     if (this.state.email && this.state.text) {
       axios.post(appointment_url, {data: appointment}).then(res => {
-        console.log(res)
+        if (res.status === 200) {
+          this.props.handleConfirmation(true)
+        }
       })
     } else if (this.state.email || this.state.text) {
       axios.post(appointment_url, {data: appointment}).then(res => {
-        console.log(res)
+        if (res.status === 200) {
+          this.props.handleConfirmation(true)
+        }
       })
     } else {
       alert("You gotta select a box first")
