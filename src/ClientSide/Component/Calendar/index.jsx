@@ -136,10 +136,22 @@ class Calendar extends Component {
           onSelecting={this.onSelecting}
           eventPropGetter={this.eventPropGetter}
           slotPropGetter={this.slotPropGetter}
+          components={{
+            event: Event
+          }}
+          views={['week', 'day']}
           />
       </div>
      )
   }
 }
  
+function Event({ event }) {
+  return (
+    <span>
+      {event.title === 'Booked' ? 'Booked' : ''}
+    </span>
+  )
+}
+
 export default Calendar;
