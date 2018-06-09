@@ -13,6 +13,7 @@ function serviceList (props) {
 
   return (
     <div>
+      <h3>Select A Service</h3>
       {serviceList}
     </div>
   )

@@ -23,7 +23,7 @@ class Checkout extends Component{
                 totalPrice += service.priceCents;
                 return (<p key={i}>{service.description} - <b>${(service.priceCents/100.0).toFixed(2)}</b></p>);
               });
-    let tax = totalPrice*.15;
+    let tax = totalPrice*.13;
     return(
       <Card>
         <CardContent>

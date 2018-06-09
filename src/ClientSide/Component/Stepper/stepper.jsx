@@ -17,7 +17,7 @@ import Checkout from '../Checkout';
 
 const styles = theme => ({
   root: {
-    width: '90%',
+    width: '100%',
   },
   button: {
     marginRight: theme.spacing.unit,
@@ -45,7 +45,6 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
             handleClientInput={handleClientInput}
             selectedServices={selectedServices}
           />
-          Select a service
         </div>
       )
     case 1:
@@ -62,7 +61,6 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
             <UserInfo
             clientInfo={client}
             handleClientInput={handleClientInput}/>
-            Contact Information
           </div>
         )
     case 3:

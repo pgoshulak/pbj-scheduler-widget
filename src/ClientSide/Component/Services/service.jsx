@@ -48,9 +48,14 @@ class Service extends Component {
     return (
       <div>
         <Checkbox onChange = { this.handleCheckBox } defaultChecked={this.state.isChecked}/>
-        <span>{this.props.service.description}</span>
-        <span>{this.props.service.priceCents}</span>
-        <span>{this.props.service.durationMin}</span>
+        {/*<span>{this.props.service.description} </span>
+        <span>${(this.props.service.priceCents/100.0).toFixed(2)} </span>
+        <span>{this.props.service.durationMin} Minutes</span>*/}
+        <p>
+          {this.props.service.description}<br />
+          ${(this.props.service.priceCents/100.0).toFixed(2)}<br />
+          {this.props.service.durationMin} Minutes
+        </p>
       </div>
     )
   }
