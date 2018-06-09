@@ -34,7 +34,7 @@ function getSteps() {
 
 //this is where your components will go
 
-function getStepContent(step, business, client, handleClientInput, selectedServices, selectedAppointment) {
+function getStepContent(step, business, client, handleClientInput, selectedServices, selectedAppointment, confirmationState, handleConfirmation) {
 
   switch (step) {
     case 0:
@@ -66,16 +66,28 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
           </div>
         )
     case 3:
-      return (
-        <div>
-          <Confirmation
-          selectedServices={selectedServices}
-          selectedAppointment={selectedAppointment}
-          clientInfo={client}
-          business={business}
-          />
-        </div>
-      )
+      if(confirmationState) {
+        return (
+          <div>
+            <Checkout
+              selectedServices={selectedServices}
+              selectedAppointment={selectedAppointment}
+              clientInfo={client}
+              business={business}
+            />
+          </div>)
+      } else {
+        return (
+          <div>
+            <Confirmation
+            selectedServices={selectedServices}
+            selectedAppointment={selectedAppointment}
+            clientInfo={client}
+            business={business}
+            handleConfirmation={handleConfirmation}
+            />
+          </div>)
+      }
     case 4:
       return (
         <div>
@@ -100,6 +112,7 @@ class HorizontalLinearStepper extends React.Component {
   state = {
     activeStep: 0,
     skipped: new Set(),
+    confirmation: false
   };
 
   handleNext = () => {
@@ -123,6 +136,10 @@ class HorizontalLinearStepper extends React.Component {
       activeStep: 0,
     });
   };
+
+  handleConfirmation = (confirm) => {
+    this.setState({confirmation: confirm})
+  }
 
   render() {
     const { classes } = this.props;
@@ -166,7 +183,8 @@ class HorizontalLinearStepper extends React.Component {
                     this.props.handleClientInput,
                     this.props.selectedServices,
                     this.props.selectedAppointment,
-                    this.props.nameOfBusiness
+                    this.state.confirmation,
+                    this.handleConfirmation
                   )}
               </div>
               <div>
