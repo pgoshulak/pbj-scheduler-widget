@@ -139,7 +139,7 @@ class SimpleTabs extends React.Component {
           {value === 1 &&
             <TabContainer>
               {clientServices}
-              <div><button onClick={this.sendAppointmentToServer}>Confirm Appointment</button></div>
+              <div><button onClick={() => this.sendAppointmentToServer()}>Confirm Appointment</button></div>
               <Checkbox
                 checked={this.state.text}
                 onChange={this.checkBoxChange}
