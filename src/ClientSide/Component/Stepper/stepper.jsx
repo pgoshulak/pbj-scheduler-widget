@@ -11,8 +11,9 @@ import Typography from '@material-ui/core/Typography';
 //imported components
 import UserInfo from '../UserInfo/userInfo.jsx';
 import ServiceList from '../ServiceList/serviceList.jsx';
-import Calendar from '../Calendar'
-import Confirmation from '../Confirmation'
+import Calendar from '../Calendar';
+import Confirmation from '../Confirmation';
+import Checkout from '../Checkout';
 
 const styles = theme => ({
   root: {
@@ -28,7 +29,7 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['Select Service', 'Book Appointment', 'Your Information', 'Confirmation'];
+  return ['Select Service', 'Book Appointment', 'Your Information', 'Payment', 'Confirmation'];
 }
 
 //this is where your components will go
@@ -72,6 +73,17 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
           selectedAppointment={selectedAppointment}
           clientInfo={client}
           business={business}
+          />
+        </div>
+      )
+    case 4:
+      return (
+        <div>
+          <Checkout
+            selectedServices={selectedServices}
+            selectedAppointment={selectedAppointment}
+            clientInfo={client}
+            business={business}
           />
         </div>
       )
