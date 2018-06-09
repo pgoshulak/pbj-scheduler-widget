@@ -67,13 +67,16 @@ class SimpleTabs extends React.Component {
       stripeData: {
         token: stripeToken
       },
-      typeOfPayment: {
+      typeOfConfirmation: {
         text: this.state.text,
         email: this.state.email
       }
     }
-    console.log(appointment.typeOfPayment)
-    if (this.state.email || this.state.text) {
+    if (this.state.email && this.state.text) {
+      axios.post(appointment_url, {data: appointment}).then(res => {
+        console.log(res)
+      })
+    } else if (this.state.email || this.state.text) {
       axios.post(appointment_url, {data: appointment}).then(res => {
         console.log(res)
       })
@@ -88,11 +91,11 @@ class SimpleTabs extends React.Component {
   };
 
   checkBoxChange = (event) => {
-    this.setState({[event.target.value]: true})
-    if (event.target.value === "email"){
-      this.setState({text: false})
+    const selection = event.target.value;
+    if (this.state[selection]) {
+      this.setState({[event.target.value]: false})
     } else {
-      this.setState({email: false} )
+      this.setState({[event.target.value]: true})
     }
   }
 
@@ -136,6 +139,7 @@ class SimpleTabs extends React.Component {
           {value === 1 &&
             <TabContainer>
               {clientServices}
+              <div><button onClick={this.sendAppointmentToServer}>Confirm Appointment</button></div>
               <Checkbox
                 checked={this.state.text}
                 onChange={this.checkBoxChange}
