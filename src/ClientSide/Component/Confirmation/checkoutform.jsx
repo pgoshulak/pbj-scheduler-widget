@@ -1,6 +1,6 @@
 import React from 'react';
 import {injectStripe} from 'react-stripe-elements';
-
+import Checkbox from '@material-ui/core/Checkbox';
 import CardSection from './cardSection.jsx'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -17,9 +17,7 @@ const styles = theme => ({
 });
 
 class Checkoutform extends React.Component {
-
   handleSubmit = (event) => {
-
     event.preventDefault();
     const customerName = this.props.clientInfo.name
     this.props.stripe.createToken({name: customerName}).then(({token}) => {
@@ -28,12 +26,28 @@ class Checkoutform extends React.Component {
     });
   }
 
+  checkbox = (event) => {
+    this.props.checkBoxChange(event);
+  }
+
   render () {
     const { classes, theme } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
         <CardSection />
-        <button className={classes.confirm}>PAY</button>
+        <Checkbox
+          checked={this.props.checkBoxState.text}
+          onChange={this.checkbox}
+          value="text"
+          />
+        <span>Text me Confirmation</span>
+        <Checkbox
+          checked={this.props.checkBoxState.email}
+          onChange={this.checkbox}
+          value="email"
+          />
+        <span>Email me Confirmation</span>
+        <div><button className={classes.confirm}>PAY</button></div>
       </form>
     );
   }

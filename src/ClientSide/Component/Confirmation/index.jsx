@@ -125,25 +125,12 @@ class SimpleTabs extends React.Component {
           <TabContainer>
             {clientServices}
             <StripeProvider apiKey={Publishable.keyPublishable}>
-              <Checkout sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo}/>
+              <Checkout checkBoxState={this.state} checkBoxChange={this.checkBoxChange} sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo}/>
             </StripeProvider>
-            <Checkbox
-              checked={this.state.text}
-              onChange={this.checkBoxChange}
-              value="text"
-            />
-            <span>Text me Confirmation</span>
-            <Checkbox
-                checked={this.state.email}
-                onChange={this.checkBoxChange}
-                value="email"
-              />
-            <span>Email me Confirmation</span>
           </TabContainer>}
           {value === 1 &&
             <TabContainer>
               {clientServices}
-              <div><button onClick={() => this.sendAppointmentToServer()}>Confirm Appointment</button></div>
               <Checkbox
                 checked={this.state.text}
                 onChange={this.checkBoxChange}
@@ -156,6 +143,7 @@ class SimpleTabs extends React.Component {
                   value="email"
                 />
               <span>Email me Confirmation</span>
+              <div><button onClick={() => this.sendAppointmentToServer()}>Confirm Appointment</button></div>
             </TabContainer>}
           </Paper>
         </div>
