@@ -34,19 +34,20 @@ const styles = theme => ({
   },
   paper: {
     backgroundColor: '#f6f9fd'
+  },
+  tabBar: {
+    backgroundColor: '#F0F0F0'
   }
 });
 
 class SimpleTabs extends React.Component {
   state = {
-    message: 'Waiting for user selection',
     text: false,
     email: false,
     value: 0
   };
 
   sendAppointmentToServer = (stripeToken) => {
-    this.setState({message: 'Sending appointment data to server'})
     const appointment_url = `http://localhost:5000/api/business/${this.props.business._id}/appointment`
     const appointment = {
       event: {
@@ -94,7 +95,6 @@ class SimpleTabs extends React.Component {
   }
 
   handleChange = (event, value) => {
-    console.log(event, value)
     this.setState({ value });
   };
 
@@ -116,14 +116,13 @@ class SimpleTabs extends React.Component {
 
     return (
       <div>
-        <div id="message-area">{this.state.message}</div>
         <div className={classes.root}>
-          <AppBar position="static">
-            <Tabs value={value} onChange={this.handleChange} centered>
+          <Paper className={classes.tabBar}>
+            <Tabs indicatorColor="primary" value={value} textColor="primary" onChange={this.handleChange} centered>
               <Tab label="Pay with Card" />
               <Tab label="Pay with Cash" />
             </Tabs>
-          </AppBar>
+          </Paper>
           <Paper className={classes.paper}>
           {value === 0 &&
           <TabContainer>
