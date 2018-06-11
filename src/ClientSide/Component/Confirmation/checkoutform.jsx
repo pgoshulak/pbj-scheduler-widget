@@ -4,6 +4,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CardSection from './cardSection.jsx'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   confirm: {
@@ -47,7 +48,7 @@ class Checkoutform extends React.Component {
           value="email"
           />
         <span>Email me Confirmation</span>
-        <div><button className={classes.confirm}>PAY</button></div>
+        <div>{this.props.progress ? <CircularProgress className={classes.progress} size={50} />:<button className={classes.confirm}>PAY</button>}</div>
       </form>
     );
   }

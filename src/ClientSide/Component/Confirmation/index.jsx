@@ -20,6 +20,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import TableFooter from '@material-ui/core/TableFooter';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function TabContainer(props) {
   return (
@@ -61,7 +62,8 @@ class SimpleTabs extends React.Component {
   state = {
     text: false,
     email: false,
-    value: 0
+    value: 0,
+    progress: false
   };
 
   sendAppointmentToServer = (stripeToken) => {
@@ -90,25 +92,13 @@ class SimpleTabs extends React.Component {
         email: this.state.email
       }
     }
-    if (this.state.email && this.state.text) {
-      axios.post(appointment_url, {data: appointment}).then(res => {
-        if (res.status === 200) {
-          this.props.handleConfirmation(true)
-        }
-      })
-    } else if (this.state.email || this.state.text) {
-      axios.post(appointment_url, {data: appointment}).then(res => {
-        if (res.status === 200) {
-          this.props.handleConfirmation(true)
-        }
-      })
-    } else {
-      axios.post(appointment_url, {data: appointment}).then(res => {
-        if (res.status === 200) {
-          this.props.handleConfirmation(true)
-        }
-      })
-    }
+    this.setState({progress: true})
+    axios.post(appointment_url, {data: appointment}).then(res => {
+      console.log(res)
+      if (res.status === 200) {
+        this.props.handleConfirmation(true)
+      }
+    })
   }
 
   handleChange = (event, value) => {
@@ -166,50 +156,51 @@ class SimpleTabs extends React.Component {
                       Subtotal: ${(totalPrice/100.0).toFixed(2)}
                       <br/>
                       Total Price: ${(1.13*totalPrice/100.0).toFixed(2)}
-                    </TableCell>                  </TableRow>
+                    </TableCell>
+                  </TableRow>
               </TableFooter>
             </Table>
             <StripeProvider apiKey={Publishable.keyPublishable}>
               <Checkout checkBoxState={this.state} checkBoxChange={this.checkBoxChange} sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo}/>
             </StripeProvider>
           </TabContainer>}
-          {value === 1 &&
-            <TabContainer>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Service Description</TableCell>
-                    <TableCell numeric>Duration (min)</TableCell>
-                    <TableCell numeric>Price ($)</TableCell>
-                  </TableRow>
-                </TableHead>
-                {clientServices}
-                <TableFooter>
-                  <TableRow>
-                    <TableCell component="th" scope="row"></TableCell>
-                    <TableCell numeric>Total Duration: {totalDuration}</TableCell>
-                    <TableCell numeric>
-                      Subtotal: ${(totalPrice/100.0).toFixed(2)}
-                      <br/>
-                      Total Price: ${(1.13*totalPrice/100.0).toFixed(2)}
-                    </TableCell>
-                  </TableRow>
-                </TableFooter>
-              </Table>
-              <Checkbox
-                checked={this.state.text}
-                onChange={this.checkBoxChange}
-                value="text"
-              />
-              <span>Text me Confirmation</span>
-              <Checkbox
-                  checked={this.state.email}
+            {value === 1 &&
+              <TabContainer>
+                <Table className={classes.table}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Service Description</TableCell>
+                      <TableCell numeric>Duration (min)</TableCell>
+                      <TableCell numeric>Price ($)</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  {clientServices}
+                  <TableFooter>
+                    <TableRow>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell numeric>Total Duration: {totalDuration}</TableCell>
+                      <TableCell numeric>
+                        Subtotal: ${(totalPrice/100.0).toFixed(2)}
+                        <br/>
+                        Total Price: ${(1.13*totalPrice/100.0).toFixed(2)}
+                      </TableCell>
+                    </TableRow>
+                  </TableFooter>
+                </Table>
+                <Checkbox
+                  checked={this.state.text}
                   onChange={this.checkBoxChange}
-                  value="email"
+                  value="text"
                 />
-              <span>Email me Confirmation</span>
-              <div><button className={classes.confirm} onClick={() => this.sendAppointmentToServer()}>Confirm Appointment</button></div>
-            </TabContainer>}
+                <span>Text me Confirmation</span>
+                <Checkbox
+                    checked={this.state.email}
+                    onChange={this.checkBoxChange}
+                    value="email"
+                  />
+                <span>Email me Confirmation</span>
+                <div>{this.state.progress ? <CircularProgress className={classes.progress} size={50} />:<button className={classes.confirm} onClick={() => this.sendAppointmentToServer()}>Confirm Appointment</button> }</div>
+              </TabContainer>}
           </Paper>
         </div>
       </div>
