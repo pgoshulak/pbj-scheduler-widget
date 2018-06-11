@@ -14,6 +14,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
+import TableFooter from '@material-ui/core/TableFooter';
 
 function TabContainer(props) {
   return (
@@ -37,6 +43,17 @@ const styles = theme => ({
   },
   tabBar: {
     backgroundColor: '#F0F0F0'
+  },
+  table: {
+    minWidth: 700,
+  },
+  confirm: {
+    backgroundColor: '#6671e6',
+    color: 'white',
+    fontSize: '14px',
+    padding: '11px',
+    borderRadius: '5px',
+    textAlign: 'left'
   }
 });
 
@@ -113,6 +130,12 @@ class SimpleTabs extends React.Component {
     const clientServices = this.props.selectedServices.map(service => {
       return <ConfirmationServices key={service.billingCode} service={service}/>
     })
+    const totalPrice = this.props.selectedServices.reduce((total, service) => {
+        return total + service.priceCents
+      }, 0)
+    const totalDuration = this.props.selectedServices.reduce((total, service) => {
+        return total + service.durationMin
+      }, 0)
 
     return (
       <div>
@@ -126,14 +149,46 @@ class SimpleTabs extends React.Component {
           <Paper className={classes.paper}>
           {value === 0 &&
           <TabContainer>
-            {clientServices}
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Service Description</TableCell>
+                  <TableCell numeric>Duration (min)</TableCell>
+                  <TableCell numeric>Price</TableCell>
+                </TableRow>
+              </TableHead>
+              {clientServices}
+              <TableFooter>
+                  <TableRow>
+                    <TableCell component="th" scope="row"></TableCell>
+                    <TableCell numeric>Total Duration: {totalDuration}</TableCell>
+                    <TableCell numeric>Total Price: ${(totalPrice/100).toFixed(2)}</TableCell>
+                  </TableRow>
+              </TableFooter>
+            </Table>
             <StripeProvider apiKey={Publishable.keyPublishable}>
               <Checkout checkBoxState={this.state} checkBoxChange={this.checkBoxChange} sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo}/>
             </StripeProvider>
           </TabContainer>}
           {value === 1 &&
             <TabContainer>
-              {clientServices}
+              <Table className={classes.table}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Service Description</TableCell>
+                    <TableCell numeric>Duration (min)</TableCell>
+                    <TableCell numeric>Price</TableCell>
+                  </TableRow>
+                </TableHead>
+                {clientServices}
+                <TableFooter>
+                  <TableRow>
+                    <TableCell component="th" scope="row"></TableCell>
+                    <TableCell numeric>Total Duration: {totalDuration}</TableCell>
+                    <TableCell numeric>Total Price: ${(totalPrice/100).toFixed(2)}</TableCell>
+                  </TableRow>
+                </TableFooter>
+              </Table>
               <Checkbox
                 checked={this.state.text}
                 onChange={this.checkBoxChange}
@@ -146,7 +201,7 @@ class SimpleTabs extends React.Component {
                   value="email"
                 />
               <span>Email me Confirmation</span>
-              <div><button onClick={() => this.sendAppointmentToServer()}>Confirm Appointment</button></div>
+              <div><button className={classes.confirm} onClick={() => this.sendAppointmentToServer()}>Confirm Appointment</button></div>
             </TabContainer>}
           </Paper>
         </div>
