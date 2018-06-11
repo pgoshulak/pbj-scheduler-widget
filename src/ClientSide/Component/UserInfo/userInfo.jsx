@@ -55,6 +55,7 @@ class UserInfo extends Component {
   render(){
     return (
       <div>
+        <h3>Your Contact Information</h3>
         <FormControl>
           <InputLabel>Name</InputLabel>
           <Input
