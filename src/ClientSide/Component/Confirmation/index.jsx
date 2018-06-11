@@ -142,8 +142,8 @@ class SimpleTabs extends React.Component {
         <div className={classes.root}>
           <Paper className={classes.tabBar}>
             <Tabs indicatorColor="primary" value={value} textColor="primary" onChange={this.handleChange} centered>
-              <Tab label="Pay with Card" />
-              <Tab label="Pay with Cash" />
+              <Tab label="Pay now" />
+              <Tab label="Pay later" />
             </Tabs>
           </Paper>
           <Paper className={classes.paper}>
