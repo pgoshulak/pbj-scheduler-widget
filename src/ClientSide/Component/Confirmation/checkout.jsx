@@ -7,7 +7,7 @@ class Checkout extends React.Component {
   render() {
     return (
       <Elements>
-        <CheckoutForm checkBoxState={this.props.checkBoxState} checkBoxChange={this.props.checkBoxChange} sendAppointment={this.props.sendAppointment} clientInfo={this.props.clientInfo}/>
+        <CheckoutForm checkBoxState={this.props.checkBoxState} progress={this.props.progress} checkBoxChange={this.props.checkBoxChange} sendAppointment={this.props.sendAppointment} clientInfo={this.props.clientInfo}/>
       </Elements>
     );
   }
