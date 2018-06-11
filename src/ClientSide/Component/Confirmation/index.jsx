@@ -154,7 +154,7 @@ class SimpleTabs extends React.Component {
                 <TableRow>
                   <TableCell>Service Description</TableCell>
                   <TableCell numeric>Duration (min)</TableCell>
-                  <TableCell numeric>Price</TableCell>
+                  <TableCell numeric>Price ($)</TableCell>
                 </TableRow>
               </TableHead>
               {clientServices}
@@ -177,7 +177,7 @@ class SimpleTabs extends React.Component {
                   <TableRow>
                     <TableCell>Service Description</TableCell>
                     <TableCell numeric>Duration (min)</TableCell>
-                    <TableCell numeric>Price</TableCell>
+                    <TableCell numeric>Price ($)</TableCell>
                   </TableRow>
                 </TableHead>
                 {clientServices}
