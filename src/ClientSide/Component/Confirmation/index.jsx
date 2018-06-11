@@ -162,8 +162,11 @@ class SimpleTabs extends React.Component {
                   <TableRow>
                     <TableCell component="th" scope="row"></TableCell>
                     <TableCell numeric>Total Duration: {totalDuration}</TableCell>
-                    <TableCell numeric>Total Price: ${(totalPrice/100).toFixed(2)}</TableCell>
-                  </TableRow>
+                    <TableCell numeric>
+                      Subtotal: ${(totalPrice/100.0).toFixed(2)}
+                      <br/>
+                      Total Price: ${(1.13*totalPrice/100.0).toFixed(2)}
+                    </TableCell>                  </TableRow>
               </TableFooter>
             </Table>
             <StripeProvider apiKey={Publishable.keyPublishable}>
@@ -185,7 +188,11 @@ class SimpleTabs extends React.Component {
                   <TableRow>
                     <TableCell component="th" scope="row"></TableCell>
                     <TableCell numeric>Total Duration: {totalDuration}</TableCell>
-                    <TableCell numeric>Total Price: ${(totalPrice/100).toFixed(2)}</TableCell>
+                    <TableCell numeric>
+                      Subtotal: ${(totalPrice/100.0).toFixed(2)}
+                      <br/>
+                      Total Price: ${(1.13*totalPrice/100.0).toFixed(2)}
+                    </TableCell>
                   </TableRow>
                 </TableFooter>
               </Table>
