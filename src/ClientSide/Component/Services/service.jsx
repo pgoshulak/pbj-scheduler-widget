@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
+import TableCell from '@material-ui/core/TableCell';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
 
 class Service extends Component {
   constructor(props) {
@@ -46,17 +50,14 @@ class Service extends Component {
 
   render(){
     return (
-      <div>
-        <Checkbox onChange = { this.handleCheckBox } defaultChecked={this.state.isChecked}/>
-        {/*<span>{this.props.service.description} </span>
-        <span>${(this.props.service.priceCents/100.0).toFixed(2)} </span>
-        <span>{this.props.service.durationMin} Minutes</span>*/}
-        <p>
-          {this.props.service.description}<br />
-          ${(this.props.service.priceCents/100.0).toFixed(2)}<br />
-          {this.props.service.durationMin} Minutes
-        </p>
-      </div>
+        <TableBody>
+          <TableRow>
+            <TableCell><Checkbox onChange = { this.handleCheckBox } defaultChecked={this.state.isChecked}/></TableCell>
+            <TableCell numeric>{this.props.service.description}</TableCell>
+            <TableCell numeric>${(this.props.service.priceCents/100.0).toFixed(2)}</TableCell>
+            <TableCell numeric>{this.props.service.durationMin} Minutes</TableCell>
+          </TableRow>
+        </TableBody>
     )
   }
 }

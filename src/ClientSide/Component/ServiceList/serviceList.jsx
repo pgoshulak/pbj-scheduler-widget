@@ -1,5 +1,10 @@
 import React from 'react';
 import Service from '../Services/service.jsx';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 function serviceList (props) {
   const serviceList = props.services.map((service, i) => {
@@ -14,7 +19,18 @@ function serviceList (props) {
   return (
     <div>
       <h3>Select A Service</h3>
-      {serviceList}
+
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Select Service</TableCell>
+            <TableCell numeric>Service</TableCell>
+            <TableCell numeric>Price</TableCell>
+            <TableCell numeric>Duration</TableCell>
+          </TableRow>
+        </TableHead>
+            {serviceList}
+      </Table>
     </div>
   )
 }
