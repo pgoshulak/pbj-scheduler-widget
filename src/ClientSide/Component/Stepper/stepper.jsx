@@ -29,7 +29,7 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['Select Service', 'Book Appointment', 'Your Information', 'Payment', 'Confirmation'];
+  return ['Select Service', 'Book Appointment', 'Your Information', 'Payment'];
 }
 
 //this is where your components will go
@@ -86,17 +86,6 @@ function getStepContent(step, business, client, handleClientInput, selectedServi
             />
           </div>)
       }
-    case 4:
-      return (
-        <div>
-          <Checkout
-            selectedServices={selectedServices}
-            selectedAppointment={selectedAppointment}
-            clientInfo={client}
-            business={business}
-          />
-        </div>
-      )
     default:
       return 'Unknown step';
   }
