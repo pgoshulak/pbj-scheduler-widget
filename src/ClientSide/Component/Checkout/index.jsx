@@ -37,6 +37,7 @@ class Checkout extends Component{
           Total: <b>${((totalPrice + tax)/100.0).toFixed(2)} </b>
 
           <p>We've sent you a confirmation, See you soon!</p>
+          <p>You may close this window when finished.</p>
         </CardContent>
       </Card>
     );
