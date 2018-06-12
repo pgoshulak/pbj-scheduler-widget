@@ -161,7 +161,7 @@ class SimpleTabs extends React.Component {
               </TableFooter>
             </Table>
             <StripeProvider apiKey={Publishable.keyPublishable}>
-              <Checkout checkBoxState={this.state} checkBoxChange={this.checkBoxChange} sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo}/>
+              <Checkout checkBoxState={this.state} progress={this.state.progress} checkBoxChange={this.checkBoxChange} sendAppointment={this.sendAppointmentToServer} clientInfo={this.props.clientInfo}/>
             </StripeProvider>
           </TabContainer>}
             {value === 1 &&
