@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PBJ Scheduler</title>
+  <title>PBJ Scheduling</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Dancing+Script:700|Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
   <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
 </head>
+<style>
+  #main-title {
+    font-family:'Dancing Script', 'Roboto', 'Sans Serif';
+    font-size: 48px !important;
+    font-weight: 'bold'
+  }
+  .parallax__image-container img {
+    filter: brightness(0.5)
+  }
+
+</style>
 <body>
  <div id="app">
    <v-app light>
-    <!-- <v-toolbar class="white">
-      <v-toolbar-title v-text="title"></v-toolbar-title>
-    </v-toolbar> -->
+    <v-toolbar class="white">
+      <v-toolbar-title></v-toolbar-title>
+    </v-toolbar>
     <v-content>
       <section>
-        <v-parallax src="assets/hero.jpeg" height="600">
+        <v-parallax src="assets/team.jpeg" height="400">
           <v-layout
             column
             align-center
             justify-center
             class="white--text"
           >
-            <img src="assets/vuetify.png" alt="Vuetify.js" height="200">
-            <h1 class="white--text mb-2 display-1 text-xs-center">PBJ Scheduler</h1>
+            <!-- <img src="assets/vuetify.png" alt="Vuetify.js" height="200"> -->
+            <h1 id="main-title" class="white--text mb-2 display-1 text-xs-center">PBJ Scheduling</h1>
             <div class="subheading mb-3 text-xs-center">Online booking made easy</div>
             <v-btn
-              class="blue lighten-2 mt-5"
+              class="blue lighten-1 mt-5"
               dark
               large
               href="/pre-made-themes"
@@ -107,7 +118,7 @@
       </section>
 
       <section>
-        <v-parallax src="assets/section.jpg" height="380">
+        <v-parallax src="assets/double.jpg" height="280">
           <v-layout column align-center justify-center>
             <div class="headline white--text mb-3 text-xs-center">Booking online has never been easier</div>
             <em>Kick-start your appointment scheduling today</em>
@@ -132,9 +143,10 @@
                   <div class="headline">Company info</div>
                 </v-card-title>
                 <v-card-text>
-                  Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. 
-                  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                  Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti. 
+                  At PBJ Scheduling, we believe in enabling small business owners to spend
+                  less time on the tedious tasks and more time on running your business. Our
+                  scheduling software leverages an API-driven ecosystem to robustly grow your
+                  business and focus on the bottom line value propositions.
                 </v-card-text>
               </v-card>
             </v-flex>
@@ -168,7 +180,7 @@
                       <v-icon class="blue--text text--lighten-2">email</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                      <v-list-tile-title>pbj@pbj-scheduler.com</v-list-tile-title>
+                      <v-list-tile-title>pbj@pbj-scheduling.com</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                 </v-list>
